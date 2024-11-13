@@ -1,4 +1,4 @@
-module github.com/aarondl/oa3
+module github.com/ProlificLabs/oa3
 
 go 1.18
 
@@ -8,6 +8,7 @@ require (
 	github.com/aarondl/fixtures v0.0.1
 	github.com/aarondl/json v0.0.0-20221020222930-8b0db17ef1bf
 	github.com/google/uuid v1.3.0
+	github.com/huandu/xstrings v1.3.2
 	github.com/peterhellberg/duration v0.0.0-20191119133758-ec6baeebcd10
 	github.com/shopspring/decimal v1.3.1
 	github.com/spf13/cobra v1.5.0
@@ -18,8 +19,6 @@ require (
 require (
 	github.com/Masterminds/goutils v1.1.1 // indirect
 	github.com/Masterminds/semver v1.5.0 // indirect
-	github.com/aarondl/opt v0.0.0-20221021153724-6caa84eca0a7 // indirect
-	github.com/huandu/xstrings v1.3.2 // indirect
 	github.com/imdario/mergo v0.3.13 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
@@ -29,3 +28,5 @@ require (
 	github.com/stretchr/testify v1.8.0 // indirect
 	golang.org/x/crypto v0.0.0-20220722155217-630584e8d5aa // indirect
 )
+
+replace github.com/aarondl/json => github.com/ProlificLabs/oa3/json-opt v0.0.0
