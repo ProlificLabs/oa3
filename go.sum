@@ -4,14 +4,15 @@ github.com/Masterminds/semver v1.5.0 h1:H65muMkzWKEuNDnfl9d70GUjFniHKHRbFPGBuZ3Q
 github.com/Masterminds/semver v1.5.0/go.mod h1:MB6lktGJrhw8PrUyiEoblNEGEQ+RzHPF078ddwwvV3Y=
 github.com/Masterminds/sprig v2.22.0+incompatible h1:z4yfnGrZ7netVz+0EDJ0Wi+5VZCSYp4Z0m2dk6cEM60=
 github.com/Masterminds/sprig v2.22.0+incompatible/go.mod h1:y6hNFY5UBTIWBxnzTeuNhlNS5hqE0NB0E6fgfo2Br3o=
-github.com/ProlificLabs/json-opt v0.0.1 h1:9MvHopObZpdMK5BxiOKCNUX1OKb509otGrLnRm0Te5g=
-github.com/ProlificLabs/json-opt v0.0.1/go.mod h1:xe5jPO4c/2oSwF8yERtnWuJLHJy33V/4ZO3mn8KArBM=
+github.com/ProlificLabs/json-opt v0.0.2 h1:t272hvdrrrrdrKOVmHPrn8VZ2zZOsA8+3DTLaXDT5q0=
+github.com/ProlificLabs/json-opt v0.0.2/go.mod h1:CJDC5kpLKoRY0RYk6fbkDfeKWQp0zs87RvMIGRU0KhU=
 github.com/aarondl/chrono v0.0.0-20220619041552-b7e20a5d82b7 h1:SnCBUBfsyckg4ysZ+TlSoyVJvRAcRqf5TcHFkSNlgME=
 github.com/aarondl/chrono v0.0.0-20220619041552-b7e20a5d82b7/go.mod h1:VmrhCQy/ZWiHiVGLtY7WcMVQbIF+AqpD+Hn6HjWhME8=
 github.com/aarondl/fixtures v0.0.1 h1:V8kNm0gyNqGz6plX2b7Yu65MDs9k2Advnw/ddRBSkQU=
 github.com/aarondl/fixtures v0.0.1/go.mod h1:3HSL7FaxMCcKQITEV46UhLsokm1tVgGoGxFEJxQMxfo=
 github.com/aarondl/oa3 v0.0.57 h1:Cy1Vgw02bCq25xhS3vxn77fFqOnzlKHBVtwP+9XXDJw=
 github.com/aarondl/oa3 v0.0.57/go.mod h1:V31xUoEmrdWaRmKVFxF9fvc9S6LucpV2AddRhL4mpIg=
+github.com/aarondl/opt v0.0.0-20240623220848-083f18ab9536 h1:vhpjulzH5Tr4S3uJ3Y/9pNL481kPq5ERj13ceAW0/uE=
 github.com/cpuguy83/go-md2man/v2 v2.0.2/go.mod h1:tgQtvFlXSQOSOSIRvRPT7W67SCa46tRHOmNcaadrF8o=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
