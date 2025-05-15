@@ -1,4 +1,4 @@
-module github.com/ProlificLabs/oa3
+module github.com/aarondl/oa3
 
 go 1.18
 
