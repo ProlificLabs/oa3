@@ -42,8 +42,8 @@ type {{$wrapName}} struct {
     Header{{$hname | replace "-" "" | title}} {{if $header.Required -}}
                                     string
                                 {{- else -}}
-                                    {{- $.Import "github.com/aarondl/opt/omit" -}}
-                                    omit.Val[string]
+                                    {{- $.Import "github.com/ProlificLabs/snowball/0_clean/0_domain/primitives" -}}
+                                    primitives.Optional[string]
                                 {{- end -}}
                         {{- end}}
                         {{- with $content := $resp.Content -}}

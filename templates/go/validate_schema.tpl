@@ -1,5 +1,5 @@
 {{- /* Top level object is a Schema, Name is the name of the local var */ -}}
-{{- $.Import "github.com/aarondl/oa3/support" -}}
+{{- $.Import "github.com/ProlificLabs/snowball/0_clean/0_domain/primitives" -}}
 
 {{- /* Validate schema helper recursively validates schema pieces */ -}}
 {{- define "validate_schema_helper" -}}
@@ -7,12 +7,12 @@
     {{- /* Process array kind */ -}}
     {{- if eq $s.Type "array" -}}
         {{if $.Object.MaxItems -}}
-    if err := support.ValidateMaxItems(o, {{$.Object.MaxItems}}); err != nil {
+    if err := primitives.ValidateMaxItems(o, {{$.Object.MaxItems}}); err != nil {
         ers = append(ers, err)
     }
         {{- end -}}
         {{- if $.Object.MinItems}}
-    if err := support.ValidateMinItems({{$.Name}}, {{$.Object.MinItems}}); err != nil {
+    if err := primitives.ValidateMinItems({{$.Name}}, {{$.Object.MinItems}}); err != nil {
         ers = append(ers, err)
     }
         {{end -}}
@@ -24,12 +24,12 @@
         ctx = append(ctx, fmt.Sprintf("[%d]", i))
             {{- if or $s.Items.Ref (not (isInlinePrimitive $s.Items.Schema))}}
         if newErrs := Validate(o); newErrs != nil {
-            errs = support.AddErrsFlatten(errs, strings.Join(ctx, "."), newErrs)
+            errs = primitives.AddErrsFlatten(errs, strings.Join(ctx, "."), newErrs)
         }
             {{- else }}
         var ers []error
         {{template "validate_schema_helper" (newDataRequired $ "o" $s.Items true)}}
-        errs = support.AddErrs(errs, strings.Join(ctx, "."), ers...)
+        errs = primitives.AddErrs(errs, strings.Join(ctx, "."), ers...)
             {{- end -}}
         {{- $.Import "strings"}}
         ctx = ctx[:len(ctx)-1]
@@ -40,12 +40,12 @@
         {{- if $s.AdditionalProperties -}}
             {{- if not $s.AdditionalProperties.SchemaRef -}}{{fail "additionalItems being bool is not supported"}}{{- end}}
             {{if $.Object.MaxProperties -}}
-    if err := support.ValidateMaxProperties({{$.Name}}, {{$.Object.MaxProperties}}); err != nil {
+    if err := primitives.ValidateMaxProperties({{$.Name}}, {{$.Object.MaxProperties}}); err != nil {
         ers = append(ers, err)
     }
             {{- end -}}
             {{- if $.Object.MinProperties}}
-    if err := support.ValidateMinProperties({{$.Name}}, {{$.Object.MinProperties}}); err != nil {
+    if err := primitives.ValidateMinProperties({{$.Name}}, {{$.Object.MinProperties}}); err != nil {
         ers = append(ers, err)
     }
             {{end -}}
@@ -56,7 +56,7 @@
         ctx = append(ctx, k)
             {{template "validate_schema_helper" (newDataRequired $ $.Name $s.AdditionalProperties true) }}
             {{- $.Import "strings"}}
-        errs = support.AddErrs(errs, strings.Join(ctx, "."), ers...)
+        errs = primitives.AddErrs(errs, strings.Join(ctx, "."), ers...)
         ctx = ctx[:len(ctx)-1]
     }
             {{- end -}}
@@ -72,7 +72,7 @@
         if len(ers) != 0 {
             ctx = append(ctx, {{printf "%q" $name}})
                     {{- $.Import "strings"}}
-            errs = support.AddErrs(errs, strings.Join(ctx, "."), ers...)
+            errs = primitives.AddErrs(errs, strings.Join(ctx, "."), ers...)
             ctx = ctx[:len(ctx)-1]
         }
     }
@@ -86,7 +86,7 @@
     if len(ers) != 0 {
         ctx = append(ctx, {{printf "%q" $name}})
                 {{- $.Import "strings"}}
-        errs = support.AddErrs(errs, strings.Join(ctx, "."), ers...)
+        errs = primitives.AddErrs(errs, strings.Join(ctx, "."), ers...)
         ctx = ctx[:len(ctx)-1]
     }
                     {{- end -}}
@@ -102,7 +102,7 @@
         if newErrs := Validate(val); newErrs != nil {
             ctx = append(ctx, {{printf "%q" $name}})
                     {{- $.Import "strings"}}
-            errs = support.AddErrsFlatten(errs, strings.Join(ctx, "."), newErrs)
+            errs = primitives.AddErrsFlatten(errs, strings.Join(ctx, "."), newErrs)
             ctx = ctx[:len(ctx)-1]
         }
     }
@@ -110,7 +110,7 @@
     if newErrs := Validate(o.{{camelcase $name}}); newErrs != nil {
         ctx = append(ctx, {{printf "%q" $name}})
                 {{- $.Import "strings"}}
-        errs = support.AddErrsFlatten(errs, strings.Join(ctx, "."), newErrs)
+        errs = primitives.AddErrsFlatten(errs, strings.Join(ctx, "."), newErrs)
         ctx = ctx[:len(ctx)-1]
     }
                     {{- end -}}
@@ -127,11 +127,11 @@
 
 // validateSchema validates the object and returns
 // errors that can be returned to the user.
-func (o {{title $.Name}}) validateSchema() support.Errors {
+func (o {{title $.Name}}) validateSchema() primitives.Oa3Errors {
     {{- $s := $.Object.Schema}}
     var ctx []string
     var ers []error
-    var errs support.Errors
+    var errs primitives.Oa3Errors
     _, _, _ = ctx, ers, errs
 
     {{template "validate_schema_helper" (newData $ "o" $.Object)}}

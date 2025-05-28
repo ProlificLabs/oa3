@@ -533,13 +533,13 @@ func primitive(tdata templates.TemplateData, schema *openapi3spec.Schema) (strin
 				return "time.Duration", nil
 			case "uuid":
 				if tdata.Params[ParamKeyUUIDType] == "google" {
-					tdata.Import("github.com/google/uuid")
-					return "uuid.UUID", nil
+					tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+					return "primitives.UUID", nil
 				}
 			case "decimal":
 				if tdata.Params[ParamKeyDecimalType] == "shopspring" {
-					tdata.Import("github.com/shopspring/decimal")
-					return "decimal.Decimal", nil
+					tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+					return "primitives.Decimal", nil
 				}
 			}
 		}
@@ -586,15 +586,15 @@ func omitnullWrap(tdata templates.TemplateData, typ string, nullable bool, requi
 	case !nullable && required:
 		return typ
 	case nullable && required:
-		kind = "null"
+		kind = "primitives.Null"
 	case nullable && !required:
-		kind = "omitnull"
+		kind = "primitives.OmitNull"
 	case !nullable && !required:
-		kind = "omit"
+		kind = "primitives.Optional"
 	}
 
-	tdata.Import("github.com/aarondl/opt/" + kind)
-	return kind + `.Val[` + typ + `]`
+	tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+	return kind + `[` + typ + `]`
 }
 
 func omitnullUnwrap(name string, nullable bool, required bool) string {
