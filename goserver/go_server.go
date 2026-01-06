@@ -506,7 +506,7 @@ func primitive(tdata templates.TemplateData, schema *openapi3spec.Schema) (strin
 			switch *schema.Format {
 			case "date":
 				if tdata.Params[ParamKeyTimeType] == "chrono" {
-					tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+					tdata.Import("github.com/ProlificLabs/snowball/internal/entities/primitives")
 					return "primitives.Date", nil
 				} else {
 					tdata.Import("time")
@@ -514,7 +514,7 @@ func primitive(tdata templates.TemplateData, schema *openapi3spec.Schema) (strin
 				}
 			case "time":
 				if tdata.Params[ParamKeyTimeType] == "chrono" {
-					tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+					tdata.Import("github.com/ProlificLabs/snowball/internal/entities/primitives")
 					return "primitives.Time", nil
 				} else {
 					tdata.Import("time")
@@ -522,7 +522,7 @@ func primitive(tdata templates.TemplateData, schema *openapi3spec.Schema) (strin
 				}
 			case "date-time":
 				if tdata.Params[ParamKeyTimeType] == "chrono" {
-					tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+					tdata.Import("github.com/ProlificLabs/snowball/internal/entities/primitives")
 					return "primitives.DateTime", nil
 				} else {
 					tdata.Import("time")
@@ -533,12 +533,12 @@ func primitive(tdata templates.TemplateData, schema *openapi3spec.Schema) (strin
 				return "time.Duration", nil
 			case "uuid":
 				if tdata.Params[ParamKeyUUIDType] == "google" {
-					tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+					tdata.Import("github.com/ProlificLabs/snowball/internal/entities/primitives")
 					return "primitives.UUID", nil
 				}
 			case "decimal":
 				if tdata.Params[ParamKeyDecimalType] == "shopspring" {
-					tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+					tdata.Import("github.com/ProlificLabs/snowball/internal/entities/primitives")
 					return "primitives.Decimal", nil
 				}
 			}
@@ -593,7 +593,7 @@ func omitnullWrap(tdata templates.TemplateData, typ string, nullable bool, requi
 		kind = "primitives.Optional"
 	}
 
-	tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+	tdata.Import("github.com/ProlificLabs/snowball/internal/entities/primitives")
 	return kind + `[` + typ + `]`
 }
 
@@ -987,7 +987,7 @@ func paramConvertFn(tdata templates.TemplateData, param openapi3spec.ParameterRe
 
 	switch innerType {
 	case "string":
-		tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+		tdata.Import("github.com/ProlificLabs/snowball/internal/entities/primitives")
 
 		switch innerFormat {
 		case "date":
@@ -1028,10 +1028,10 @@ func paramConvertFn(tdata templates.TemplateData, param openapi3spec.ParameterRe
 			return "", fmt.Errorf("no conversion function available for %s", param.Name)
 		}
 	case "boolean":
-		tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+		tdata.Import("github.com/ProlificLabs/snowball/internal/entities/primitives")
 		innerConversion = "primitives.StringToBool"
 	case "integer":
-		tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+		tdata.Import("github.com/ProlificLabs/snowball/internal/entities/primitives")
 
 		switch innerFormat {
 		case "int32":
@@ -1044,7 +1044,7 @@ func paramConvertFn(tdata templates.TemplateData, param openapi3spec.ParameterRe
 			return "", fmt.Errorf("no conversion function available for %s", param.Name)
 		}
 	case "number":
-		tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+		tdata.Import("github.com/ProlificLabs/snowball/internal/entities/primitives")
 		switch innerFormat {
 		case "float":
 			innerConversion = "primitives.StringToFloat[float32]"
@@ -1073,19 +1073,19 @@ func paramConvertFn(tdata templates.TemplateData, param openapi3spec.ParameterRe
 	var outerConversion string
 	switch {
 	case *param.Style == "form" && *param.Explode && outerType == "array":
-		tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+		tdata.Import("github.com/ProlificLabs/snowball/internal/entities/primitives")
 		outerConversion = fmt.Sprintf("primitives.ExplodedFormArrayToSlice[%s]", prim)
 	case *param.Style == "form" && !*param.Explode && outerType == "array":
-		tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+		tdata.Import("github.com/ProlificLabs/snowball/internal/entities/primitives")
 		outerConversion = fmt.Sprintf("primitives.FlatFormArrayToSlice[%s]", prim)
 	// case *param.Style == "form" && *param.Explode && param.Schema.Type == "object":
 	// case *param.Style == "form" && !*param.Explode && param.Schema.Type == "object":
 
 	case *param.Style == "simple" && *param.Explode && outerType == "array":
-		tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+		tdata.Import("github.com/ProlificLabs/snowball/internal/entities/primitives")
 		outerConversion = fmt.Sprintf("primitives.FlatFormArrayToSlice[%s]", prim)
 	case *param.Style == "simple" && !*param.Explode && outerType == "array":
-		tdata.Import("github.com/ProlificLabs/snowball/0_clean/0_domain/primitives")
+		tdata.Import("github.com/ProlificLabs/snowball/internal/entities/primitives")
 		outerConversion = fmt.Sprintf("primitives.FlatFormArrayToSlice[%s]", prim)
 	}
 
