@@ -42,7 +42,7 @@ type {{$wrapName}} struct {
     Header{{$hname | replace "-" "" | title}} {{if $header.Required -}}
                                     string
                                 {{- else -}}
-                                    {{- $.Import "github.com/ProlificLabs/snowball/0_clean/0_domain/primitives" -}}
+                                    {{- $.Import "github.com/ProlificLabs/snowball/internal/entities/primitives" -}}
                                     primitives.Optional[string]
                                 {{- end -}}
                         {{- end}}

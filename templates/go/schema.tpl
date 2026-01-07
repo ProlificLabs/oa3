@@ -59,13 +59,13 @@
                 {{- $shouldWrap := or $element.Ref $element.Schema.Enum (and (ne $element.Type "array") (ne $element.Type "object")) -}}
                 {{- $fieldName := title (snakeToCamel $name)}}
     {{$fieldName}} {{if and $shouldWrap ($element.Schema.Nullable) (not $elementRequired) -}}
-                    {{- $.Import "github.com/ProlificLabs/snowball/0_clean/0_domain/primitives" -}}
+                    {{- $.Import "github.com/ProlificLabs/snowball/internal/entities/primitives" -}}
                     primitives.OmitNull[{{template "type_name" (recurseDataSetRequired $ $fieldName $element $elementRequired)}}]
                 {{- else if and $shouldWrap ($element.Schema.Nullable) $elementRequired -}}
-                    {{- $.Import "github.com/ProlificLabs/snowball/0_clean/0_domain/primitives" -}}
+                    {{- $.Import "github.com/ProlificLabs/snowball/internal/entities/primitives" -}}
                     primitives.Null[{{template "type_name" (recurseDataSetRequired $ $fieldName $element $elementRequired)}}]
                 {{- else if and $shouldWrap (not $element.Schema.Nullable) (not $elementRequired) -}}
-                    {{- $.Import "github.com/ProlificLabs/snowball/0_clean/0_domain/primitives" -}}
+                    {{- $.Import "github.com/ProlificLabs/snowball/internal/entities/primitives" -}}
                     primitives.Optional[{{template "type_name" (recurseDataSetRequired $ $fieldName $element $elementRequired)}}]
                 {{- else -}}
                     {{template "type_name" (recurseDataSetRequired $ $fieldName $element $elementRequired)}}

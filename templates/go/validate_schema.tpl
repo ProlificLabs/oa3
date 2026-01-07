@@ -1,5 +1,5 @@
 {{- /* Top level object is a Schema, Name is the name of the local var */ -}}
-{{- $.Import "github.com/ProlificLabs/snowball/0_clean/0_domain/primitives" -}}
+{{- $.Import "github.com/ProlificLabs/snowball/internal/entities/primitives" -}}
 
 {{- /* Validate schema helper recursively validates schema pieces */ -}}
 {{- define "validate_schema_helper" -}}
